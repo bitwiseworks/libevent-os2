@@ -392,7 +392,6 @@ AC_CHECK_FUNCS([ \
   putenv \
   sendfile \
   setenv \
-  setrlimit \
   sigaction \
   signal \
   splice \
