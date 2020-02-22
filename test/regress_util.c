@@ -1495,6 +1495,7 @@ end:
 	;
 }
 
+#ifndef __OS2__
 static void
 test_evutil_v6addr_is_local(void *arg)
 {
@@ -1535,10 +1536,13 @@ test_evutil_v6addr_is_local(void *arg)
 end:
 	;
 }
+#endif
 
 struct testcase_t util_testcases[] = {
 	{ "ipv4_parse", regress_ipv4_parse, 0, NULL, NULL },
+#ifndef __OS2__
 	{ "ipv6_parse", regress_ipv6_parse, 0, NULL, NULL },
+#endif
 	{ "sockaddr_port_parse", regress_sockaddr_port_parse, 0, NULL, NULL },
 	{ "sockaddr_port_format", regress_sockaddr_port_format, 0, NULL, NULL },
 	{ "sockaddr_predicates", test_evutil_sockaddr_predicates, 0,NULL,NULL },
@@ -1568,7 +1572,9 @@ struct testcase_t util_testcases[] = {
 	{ "monotonic_prc_fallback", test_evutil_monotonic_prc, 0, &basic_setup, (void*)"fallback" },
 	{ "date_rfc1123", test_evutil_date_rfc1123, 0, NULL, NULL },
 	{ "evutil_v4addr_is_local", test_evutil_v4addr_is_local, 0, NULL, NULL },
+#ifndef __OS2__
 	{ "evutil_v6addr_is_local", test_evutil_v6addr_is_local, 0, NULL, NULL },
+#endif
 	END_OF_TESTCASES,
 };
 

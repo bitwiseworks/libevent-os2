@@ -121,7 +121,11 @@ start_loop(void)
 {
 	struct event_base *base;
 	struct evconnlistener *listener;
+#ifdef __OS2__
+	struct sockaddr_in ss;
+#else
 	struct sockaddr_storage ss;
+#endif
 	ev_socklen_t socklen = sizeof(ss);
 	evutil_socket_t fd;
 
