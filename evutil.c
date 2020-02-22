@@ -2638,7 +2638,7 @@ evutil_make_internal_pipe_(evutil_socket_t fd[2])
 	if (pipe2(fd, O_NONBLOCK|O_CLOEXEC) == 0)
 		return 0;
 #endif
-#if defined(EVENT__HAVE_PIPE)
+#if defined(EVENT__HAVE_PIPE) && !defined(__OS2__)
 	if (pipe(fd) == 0) {
 		if (evutil_fast_socket_nonblocking(fd[0]) < 0 ||
 		    evutil_fast_socket_nonblocking(fd[1]) < 0 ||
