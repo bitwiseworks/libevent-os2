@@ -186,6 +186,19 @@ die horribly
 	cygwin=false; AC_MSG_RESULT(no),
 )
 
+dnl - check if the macro __OS2__ is defined on this compiler.
+dnl - (this is how we check for a cygwin version of GCC)
+AC_MSG_CHECKING(for OS2)
+AC_TRY_COMPILE(,
+	[
+#ifndef __OS2__
+die horribly
+#endif
+	],
+	os2=true; AC_MSG_RESULT(yes),
+	os2=false; AC_MSG_RESULT(no),
+)
+
 AC_CHECK_HEADERS([zlib.h])
 
 if test "x$ac_cv_header_zlib_h" = "xyes"; then
@@ -341,7 +354,8 @@ fi
 AM_CONDITIONAL(BUILD_WIN32, test x$bwin32 = xtrue)
 AM_CONDITIONAL(BUILD_CYGWIN, test x$cygwin = xtrue)
 AM_CONDITIONAL(BUILD_MIDIPIX, test x$midipix = xtrue)
-AM_CONDITIONAL(BUILD_WITH_NO_UNDEFINED, test x$bwin32 = xtrue || test x$cygwin = xtrue || test x$midipix = xtrue)
+AM_CONDITIONAL(BUILD_OS2, test x$os2 = xtrue)
+AM_CONDITIONAL(BUILD_WITH_NO_UNDEFINED, test x$bwin32 = xtrue || test x$cygwin = xtrue || test x$midipix = xtrue || test x$os2 = xtrue)
 
 if test x$bwin32 = xtrue; then
    AC_SEARCH_LIBS([getservbyname],[ws2_32])
@@ -404,6 +418,9 @@ AC_CACHE_CHECK(
 	    [[
 		#ifdef HAVE_NETDB_H
 		#include <netdb.h>
+		#endif
+		#ifdef __OS2__
+		#include <libcx/net.h>
 		#endif
 	    ]],
 	    [[
@@ -684,6 +701,9 @@ AC_CHECK_TYPES([struct in6_addr, struct sockaddr_in6, struct sockaddr_un, sa_fam
 #endif
 #ifdef HAVE_NETDB_H
 #include <netdb.h>
+#endif
+#ifdef __OS2__
+#include <libcx/net.h>
 #endif
 #ifdef _WIN32
 #define WIN32_WINNT 0x400
