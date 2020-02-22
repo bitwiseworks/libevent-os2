@@ -38,6 +38,10 @@
 #include <sys/socket.h>
 #endif
 #include "event2/util.h"
+#ifdef __OS2__
+#include <sys/un.h>
+#include <libcx/net.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
