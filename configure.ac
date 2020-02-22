@@ -754,6 +754,9 @@ AC_TRY_COMPILE([
  #ifdef _WIN32
  #include <ws2tcpip.h>
  #else
+ #ifdef __OS2__
+ #include <libcx/net.h>
+ #endif
  #include <sys/socket.h>
  #endif],
   [socklen_t x;],

@@ -74,6 +74,9 @@ extern "C" {
 #include <sys/socket.h>
 #endif
 
+#ifdef __OS2__
+#include <libcx/net.h>
+#endif
 #include <time.h>
 
 /* Some openbsd autoconf versions get the name of this macro wrong. */
