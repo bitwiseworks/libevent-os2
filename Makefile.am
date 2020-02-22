@@ -266,26 +266,31 @@ GENERIC_LDFLAGS = -version-info $(VERSION_INFO) $(RELEASE) $(NO_UNDEFINED) $(AM_
 libevent_la_SOURCES = $(CORE_SRC) $(EXTRAS_SRC)
 libevent_la_LIBADD = @LTLIBOBJS@ $(SYS_LIBS)
 libevent_la_LDFLAGS = $(GENERIC_LDFLAGS)
+libevent_la_LDFLAGS += -shortname evnt
 
 libevent_core_la_SOURCES = $(CORE_SRC)
 libevent_core_la_LIBADD = @LTLIBOBJS@ $(SYS_LIBS)
 libevent_core_la_LDFLAGS = $(GENERIC_LDFLAGS)
+libevent_core_la_LDFLAGS += -shortname evntc
 
 if PTHREADS
 libevent_pthreads_la_SOURCES = evthread_pthread.c
 libevent_pthreads_la_LIBADD = $(MAYBE_CORE)
 libevent_pthreads_la_LDFLAGS = $(GENERIC_LDFLAGS)
+libevent_pthreads_la_LDFLAGS += -shortname evntp
 endif
 
 libevent_extra_la_SOURCES = $(EXTRAS_SRC)
 libevent_extra_la_LIBADD = $(MAYBE_CORE) $(SYS_LIBS)
 libevent_extra_la_LDFLAGS = $(GENERIC_LDFLAGS)
+libevent_extra_la_LDFLAGS += -shortname evnte
 
 if OPENSSL
 libevent_openssl_la_SOURCES = bufferevent_openssl.c
 libevent_openssl_la_LIBADD = $(MAYBE_CORE) $(OPENSSL_LIBS)
 libevent_openssl_la_LDFLAGS = $(GENERIC_LDFLAGS)
 libevent_openssl_la_CPPFLAGS = $(AM_CPPFLAGS) $(OPENSSL_INCS)
+libevent_openssl_la_LDFLAGS += -shortname evnto
 endif
 
 noinst_HEADERS +=				\
