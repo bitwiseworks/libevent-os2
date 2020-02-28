@@ -29,10 +29,10 @@ TEST_DIR=.
 TEST_SRC_DIR=.
 
 T=`echo "$0" | sed -e 's/test.sh$//'`
-if test -x "$T/test-init"
+if test -x "$T/test-init.exe"
 then
 	TEST_DIR="$T"
-elif test -x "./test/test-init"
+elif test -x "./test/test-init.exe"
 then
         TEST_DIR="./test"
 fi
