@@ -52,6 +52,8 @@
    running out of ephemeral ports */
 #ifdef _WIN32
 #define MAX_REQUESTS 1000
+#elif defined(__OS2__)
+#define MAX_REQUESTS 1000
 #else
 #define MAX_REQUESTS 4000
 #endif
